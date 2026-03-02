@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chong Min</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #111316;
+      --fg: #e8eaed;
+      --muted: #4a5060;
+      --accent: #60a5fa;
+      --border: #1e2128;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .hero {
+      padding: 120px 0 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .hero-label span { color: var(--accent); }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(52px, 10vw, 88px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 40px;
+    }
+
+    h1 .last { color: var(--accent); }
+
+    .hero-bio {
+      max-width: 480px;
+      color: #7a9ab0;
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+
+    .hero-bio strong {
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    .links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .links a svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-item:last-child { border-bottom: none; }
+
+    .project-item h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-item p {
+      font-size: 12px;
+      color: #7a9ab0;
+      line-height: 1.7;
+      max-width: 500px;
+    }
+
+    .project-tag {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 10px;
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+
+    footer {
+      padding: 40px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer span {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    footer a {
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .fade-up:nth-child(2) { animation-delay: 0.1s; }
+    .fade-up:nth-child(3) { animation-delay: 0.2s; }
+    .fade-up:nth-child(4) { animation-delay: 0.3s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 560px) {
+      .project-item { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+
+  <div class="hero">
+    <p class="hero-label fade-up">Stanford University · <span>Class of 2029</span></p>
+    <h1 class="fade-up">Chong<br><span class="last">Min</span></h1>
+    <p class="hero-bio fade-up">
+      <strong>CS Systems student</strong> at Stanford, exploring software infrastructure and energy systems.
+    </p>
+    <div class="links fade-up">
+      <a href="https://www.linkedin.com/in/chongmin07/" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="mailto:cmin29@stanford.edu">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        cmin29@stanford.edu
+      </a>
+      <a href="https://github.com/chongmindev" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-label">// Projects</p>
+    <div class="project-item">
+      <div>
+        <h3>CAISO Dispatch Monitor</h3>
+        <p>
+          A data quality and observability layer for CAISO OASIS real-time feeds.
+          Polls LMP, load forecast, and renewable generation data, detects anomalies
+          (stale values, missing intervals, price spikes), and surfaces a live dashboard
+          for grid state at any 5-minute interval.
+        </p>
+      </div>
+      <div>
+        <div class="project-tag">In Progress</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Chong Min · Stanford '28</span>
+    <a href="mailto:cmin29@stanford.edu">cmin29@stanford.edu</a>
+  </footer>
+
+</main>
+</body>
+</html>
