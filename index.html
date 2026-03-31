@@ -11,11 +11,11 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #111316;
-      --fg: #e8eaed;
-      --muted: #4a5060;
-      --accent: #60a5fa;
-      --border: #1e2128;
+      --bg: #14171c;
+      --fg: #f3f4f6;
+      --muted: #6b7280;
+      --accent: #6fbfb8;
+      --border: #2a2f38;
     }
 
     html { scroll-behavior: smooth; }
@@ -78,7 +78,7 @@
 
     .hero-bio {
       max-width: 480px;
-      color: #7a9ab0;
+      color: #9ca3af;
       font-size: 13px;
       line-height: 1.8;
       margin-bottom: 48px;
@@ -153,9 +153,17 @@
 
     .project-item p {
       font-size: 12px;
-      color: #7a9ab0;
+      color: #9ca3af;
       line-height: 1.7;
       max-width: 500px;
+    }
+
+    .project-status {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-left: 10px;
     }
 
     .project-tag {
@@ -167,6 +175,36 @@
       padding: 4px 10px;
       white-space: nowrap;
       margin-top: 4px;
+    }
+
+    .project-link {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background-color: var(--accent);
+      color: var(--bg);
+      padding: 6px 12px;
+      text-decoration: none;
+      border-radius: 4px;
+      border: 1px solid var(--accent);
+      transition: all 0.2s ease;
+    }
+
+    .project-link:hover {
+      background-color: #5aa9a2;
+      transform: translateY(-1px);
+    }
+
+    .project-link.secondary {
+      background-color: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .project-link.secondary:hover {
+      color: var(--accent);
+      border-color: var(--accent);
     }
 
     footer {
@@ -220,7 +258,7 @@
     <p class="hero-label fade-up">Stanford University · <span>Class of 2029</span></p>
     <h1 class="fade-up">Chong<br><span class="last">Min</span></h1>
     <p class="hero-bio fade-up">
-      <strong>CS Systems student</strong> at Stanford, exploring software infrastructure and energy systems.
+      <strong>CS + Math student</strong> at Stanford building systems for real-world data and infrastructure, with a focus on energy and environmental systems.
     </p>
     <div class="links fade-up">
       <a href="https://www.linkedin.com/in/chongmin07/" target="_blank">
@@ -242,18 +280,62 @@
     <p class="section-label">// Projects</p>
     <div class="project-item">
       <div>
-        <h3>CAISO Dispatch Monitor</h3>
+        <h3>
+          Local Groundwater Context Engine
+          <span class="project-status">Built</span>
+        </h3>
+
         <p>
-          A data quality and observability layer for CAISO OASIS real-time feeds.
-          Polls LMP, load forecast, and renewable generation data, detects anomalies
-          (stale values, missing intervals, price spikes), and surfaces a live dashboard
-          for grid state at any 5-minute interval.
+          Built an end-to-end data system that transforms groundwater well measurements into
+          interpretable trend and confidence signals. Handles uneven real-world data and
+          visualizes local conditions across California through an interactive map.
         </p>
       </div>
-      <div>
-        <div class="project-tag">In Progress</div>
+
+      <div style="display: flex; gap: 6px;">
+        <a href="https://chongmindev.github.io/local-groundwater-context-engine/map.html" target="_blank" class="project-link">Live</a>
+        <a href="https://github.com/chongmindev/local-groundwater-context-engine" target="_blank" class="project-link secondary">Repo</a>
       </div>
     </div>
+    <div class="project-item">
+      <div>
+        <h3>
+          Coffee Recommender System
+          <span class="project-status">In Progress</span>
+        </h3>
+
+        <p>
+          Designing a content-based recommendation system that models user taste preferences
+          and ranks coffees using feature embeddings and similarity scoring, with an emphasis
+          on explainability and iterative feedback.
+        </p>
+      </div>
+
+      <div></div>
+    </div>
+  </section>
+  <section>
+    <p class="section-label">// Experience</p>
+
+    <div class="project-item">
+      <div>
+        <h3>
+          Hydrologic Modeling Research Intern
+          <span class="project-status">Research</span>
+        </h3>
+
+        <div class="project-meta">
+          Environmental Modeling Lab, Seoul National University of Science and Technology
+        </div>
+
+        <p>
+          Modeled a 489 km² watershed using GIS workflows and public environmental data.
+          Processed 29 years of hydrologic data using SWAT-based simulations to analyze
+          system-level behavior and evaluate water management strategies.
+        </p>
+      </div>
+    </div>
+
   </section>
 
   <footer>
