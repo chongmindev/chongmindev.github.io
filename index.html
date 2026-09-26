@@ -65,15 +65,15 @@
 
     .hero-photo {
       flex-shrink: 0;
-      width: 180px;
+      width: 210px;
     }
 
     .hero-photo img {
       display: block;
       width: 100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 21 / 9;
       object-fit: cover;
-      object-position: 50% 32%;
+      object-position: 50% 30%;
       border-radius: 12px;
       border: 1px solid var(--border);
       filter: grayscale(0.15);
@@ -368,7 +368,7 @@
 
     @media (max-width: 640px) {
       .hero-inner { flex-direction: column-reverse; align-items: flex-start; gap: 32px; }
-      .hero-photo { width: 140px; }
+      .hero-photo { width: 170px; }
     }
 
     @media (max-width: 560px) {
