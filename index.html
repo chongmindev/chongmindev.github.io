@@ -158,6 +158,13 @@
       max-width: 500px;
     }
 
+    .project-meta {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
     .project-status {
       font-size: 10px;
       letter-spacing: 0.12em;
@@ -246,8 +253,28 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     @media (max-width: 560px) {
       .project-item { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .fade-up { animation: none; opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -277,8 +304,8 @@
   </div>
 
   <section>
-    <p class="section-label">// Projects</p>
-    <div class="project-item">
+    <p class="section-label reveal">// Projects</p>
+    <div class="project-item reveal">
       <div>
         <h3>
           Local Groundwater Context Engine
@@ -297,7 +324,7 @@
         <a href="https://github.com/chongmindev/local-groundwater-context-engine" target="_blank" class="project-link secondary">Repo</a>
       </div>
     </div>
-    <div class="project-item">
+    <div class="project-item reveal">
       <div>
         <h3>
           Coffee Recommender System
@@ -315,9 +342,32 @@
     </div>
   </section>
   <section>
-    <p class="section-label">// Experience</p>
+    <p class="section-label reveal">// Experience</p>
 
-    <div class="project-item">
+    <div class="project-item reveal">
+      <div>
+        <h3>
+          Data/BI Engineering Intern
+          <span class="project-status">Internship</span>
+        </h3>
+
+        <div class="project-meta">
+          SWING · Seoul, South Korea · Jun–Sep 2026
+        </div>
+
+        <p>
+          Built and deployed production data infrastructure: end-to-end pipelines and three
+          ETL systems (Databricks, Airflow, Spark SQL) powering marketing automation, operations
+          reporting, and CRM targeting. Engineered an on-demand deployment tool that cut
+          schema-change turnaround from 24 hours to ~10 minutes, adopted as a team standard, and
+          led a data-quality initiative resolving 200+ production defects with zero data loss.
+          Also drove experimentation and causal-inference work, including RCTs, fixed-effects
+          panels, and gradient-boosted models, on live business metrics.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-item reveal">
       <div>
         <h3>
           Hydrologic Modeling Research Intern
@@ -338,11 +388,29 @@
 
   </section>
 
-  <footer>
+  <footer class="reveal">
     <span>Chong Min · Stanford '29</span>
     <a href="mailto:cmin29@stanford.edu">cmin29@stanford.edu</a>
   </footer>
 
 </main>
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (el) { observer.observe(el); });
+  })();
+</script>
 </body>
 </html>
