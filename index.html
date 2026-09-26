@@ -55,6 +55,38 @@
       border-bottom: 1px solid var(--border);
     }
 
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-text { flex: 1; min-width: 0; }
+
+    .hero-photo {
+      flex-shrink: 0;
+      width: 250px;
+    }
+
+    .hero-photo img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      filter: grayscale(0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease,
+                  border-color 0.4s ease, filter 0.4s ease;
+    }
+
+    .hero-photo img:hover {
+      transform: scale(1.02) translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 14px 44px rgba(47, 191, 133, 0.20);
+      filter: grayscale(0);
+    }
+
     .hero-label {
       font-size: 11px;
       letter-spacing: 0.2em;
@@ -333,6 +365,11 @@
       transition: width 0.1s linear;
     }
 
+    @media (max-width: 640px) {
+      .hero-inner { flex-direction: column-reverse; align-items: flex-start; gap: 32px; }
+      .hero-photo { width: 168px; }
+    }
+
     @media (max-width: 560px) {
       .project-item { grid-template-columns: 1fr; }
     }
@@ -346,7 +383,8 @@
       .fade-up { animation: none; opacity: 1; transform: none; }
       .project-item:hover,
       .project-link:hover,
-      .links a:hover { transform: none; }
+      .links a:hover,
+      .hero-photo img:hover { transform: none; }
       .scroll-progress { display: none; }
     }
   </style>
@@ -356,6 +394,8 @@
 <main>
 
   <div class="hero">
+   <div class="hero-inner">
+    <div class="hero-text">
     <p class="hero-label fade-up">Stanford University · <span>Class of 2029</span></p>
     <h1 class="fade-up">Chong<br><span class="last">Min</span></h1>
     <p class="hero-bio fade-up">
@@ -377,6 +417,11 @@
         GitHub
       </a>
     </div>
+    </div>
+    <div class="hero-photo fade-up">
+      <img src="images/portrait.jpg" alt="Chong Min" width="727" height="900" />
+    </div>
+   </div>
   </div>
 
   <section>
