@@ -14,7 +14,7 @@
       --bg: #14171c;
       --fg: #f3f4f6;
       --muted: #6b7280;
-      --accent: #6fbfb8;
+      --accent: #2fbf85;
       --border: #2a2f38;
     }
 
@@ -165,6 +165,33 @@
       margin-bottom: 12px;
     }
 
+    .project-bullets {
+      list-style: none;
+      max-width: 500px;
+      margin-top: 2px;
+    }
+
+    .project-bullets li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 12px;
+      color: #9ca3af;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .project-bullets li:last-child { margin-bottom: 0; }
+
+    .project-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+    }
+
     .project-status {
       font-size: 10px;
       letter-spacing: 0.12em;
@@ -199,7 +226,7 @@
     }
 
     .project-link:hover {
-      background-color: #5aa9a2;
+      background-color: #25a06d;
       transform: translateY(-1px);
     }
 
@@ -324,22 +351,6 @@
         <a href="https://github.com/chongmindev/local-groundwater-context-engine" target="_blank" class="project-link secondary">Repo</a>
       </div>
     </div>
-    <div class="project-item reveal">
-      <div>
-        <h3>
-          Coffee Recommender System
-          <span class="project-status">In Progress</span>
-        </h3>
-
-        <p>
-          Designing a content-based recommendation system that models user taste preferences
-          and ranks coffees using feature embeddings and similarity scoring, with an emphasis
-          on explainability and iterative feedback.
-        </p>
-      </div>
-
-      <div></div>
-    </div>
   </section>
   <section>
     <p class="section-label reveal">// Experience</p>
@@ -355,15 +366,24 @@
           SWING · Seoul, South Korea · Jun–Sep 2026
         </div>
 
-        <p>
-          Built and deployed production data infrastructure: end-to-end pipelines and three
-          ETL systems (Databricks, Airflow, Spark SQL) powering marketing automation, operations
-          reporting, and CRM targeting. Engineered an on-demand deployment tool that cut
-          schema-change turnaround from 24 hours to ~10 minutes, adopted as a team standard, and
-          led a data-quality initiative resolving 200+ production defects with zero data loss.
-          Also drove experimentation and causal-inference work, including RCTs, fixed-effects
-          panels, and gradient-boosted models, on live business metrics.
-        </p>
+        <ul class="project-bullets">
+          <li>
+            Built and deployed end-to-end production pipelines and three ETL systems
+            (Databricks, Airflow, Spark SQL) powering marketing automation, operations
+            reporting, and CRM targeting.
+          </li>
+          <li>
+            Engineered an on-demand deployment tool that cut schema-change turnaround from
+            24 hours to ~10 minutes, adopted as a team standard.
+          </li>
+          <li>
+            Led a data-quality initiative resolving 200+ production defects with zero data loss.
+          </li>
+          <li>
+            Ran experimentation and causal-inference work (RCTs, fixed-effects panels,
+            gradient-boosted models) on live business metrics.
+          </li>
+        </ul>
       </div>
     </div>
 
