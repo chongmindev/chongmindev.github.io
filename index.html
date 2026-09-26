@@ -57,7 +57,7 @@
 
     .hero-inner {
       display: flex;
-      align-items: center;
+      align-items: stretch;
       gap: 48px;
     }
 
@@ -65,15 +65,16 @@
 
     .hero-photo {
       flex-shrink: 0;
-      width: 210px;
+      width: 200px;
     }
 
     .hero-photo img {
       display: block;
       width: 100%;
-      aspect-ratio: 21 / 9;
+      height: 100%;
+      aspect-ratio: 4 / 5;
       object-fit: cover;
-      object-position: 50% 30%;
+      object-position: 50% 32%;
       border-radius: 12px;
       border: 1px solid var(--border);
       filter: grayscale(0.15);
