@@ -155,6 +155,8 @@
     .face i.m { background: var(--muted); }
 
     .progress-cube .face { position: relative; overflow: hidden; }
+    /* Repaints after a turn must be instant, or old colors fade over the new ones. */
+    .progress-cube .face i { transition: none; }
 
     .strip {
       position: absolute;
