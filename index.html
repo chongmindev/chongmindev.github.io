@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chong Min</title>
-  <meta name="description" content="Chong Min, Stanford Computer Science '29. Experience in data engineering, product, and hydrologic modeling, plus projects in NLP, groundwater analytics, and specialty coffee." />
+  <meta name="description" content="Chong Min, Stanford Computer Science '29. Experience in data engineering and product, plus projects in NLP, computer vision, groundwater analytics, and specialty coffee." />
   <meta name="theme-color" content="#181818" />
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href="https://chongmindev.github.io/" />
@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -39,7 +39,7 @@
     body {
       background: var(--bg);
       color: var(--fg);
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Geist Mono', monospace;
       font-size: 14px;
       line-height: 20px;
       min-height: 100dvh;
@@ -94,7 +94,7 @@
     }
 
     .hero {
-      padding: 80px 0 48px;
+      padding: 40px 0 48px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -108,7 +108,20 @@
 
     .hero-photo {
       flex-shrink: 0;
-      width: 200px;
+      width: 240px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      filter: grayscale(0.15);
+      transition: transform 700ms var(--ease), box-shadow 700ms var(--ease),
+                  border-color 300ms var(--ease), filter 700ms var(--ease);
+    }
+
+    .hero-photo:hover {
+      transform: scale(1.02) translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 16px 48px rgba(47, 191, 133, 0.18);
+      filter: grayscale(0);
     }
 
     .hero-photo img {
@@ -118,18 +131,70 @@
       aspect-ratio: 4 / 5;
       object-fit: cover;
       object-position: 50% 32%;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      filter: grayscale(0.15);
-      transition: transform 700ms var(--ease), box-shadow 700ms var(--ease),
-                  border-color 300ms var(--ease), filter 700ms var(--ease);
     }
 
-    .hero-photo img:hover {
-      transform: scale(1.02) translateY(-4px);
-      border-color: var(--accent);
-      box-shadow: 0 16px 48px rgba(47, 191, 133, 0.18);
-      filter: grayscale(0);
+    /* Cube faces: 3x3 stickers. Solved means finished, scrambled means in progress. */
+    .face {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      width: 24px;
+      height: 24px;
+      transition: transform 700ms var(--ease);
+    }
+
+    .face i {
+      display: block;
+      border-radius: 1px;
+      background: var(--accent);
+      transition: background-color 300ms var(--ease);
+    }
+
+    .face i.w { background: var(--fg); }
+    .face i.d { background: var(--border); }
+    .face i.m { background: var(--muted); }
+
+    .progress-cube .face { position: relative; overflow: hidden; }
+
+    .strip {
+      position: absolute;
+      display: grid;
+      gap: 2px;
+      transition: transform 320ms var(--ease);
+    }
+
+    .statusline {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12px;
+      line-height: 16px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 40px;
+    }
+
+    .statusline .live::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 8px;
+      vertical-align: 1px;
+      border-radius: 1px;
+      background: var(--accent);
+    }
+
+    .prompt {
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .prompt b {
+      color: var(--accent);
+      font-weight: 600;
     }
 
     .hero-label {
@@ -141,14 +206,34 @@
       margin-bottom: 24px;
     }
 
+    .cursor {
+      display: inline-block;
+      width: 0.07em;
+      height: 0.78em;
+      margin-left: 0.1em;
+      vertical-align: -0.02em;
+      background: var(--accent);
+      animation: blink 1.1s steps(1) infinite;
+    }
+
+    .cursor.small {
+      width: 2px;
+      height: 1em;
+      vertical-align: -0.15em;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
     .hero-label span { color: var(--accent); }
 
     h1 {
-      font-size: clamp(48px, 10vw, 72px);
+      font-size: clamp(60px, 12vw, 96px);
       font-weight: 700;
       line-height: 1;
-      letter-spacing: -0.04em;
-      margin-bottom: 24px;
+      letter-spacing: -0.06em;
+      margin-bottom: 16px;
     }
 
     h1 .last { color: var(--accent); }
@@ -205,18 +290,30 @@
     }
 
     .section-label {
-      font-size: 12px;
-      line-height: 16px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: clamp(36px, 7vw, 60px);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      margin-bottom: 32px;
+    }
+
+
+    .section-label b {
       color: var(--accent);
-      margin-bottom: 24px;
+      font-weight: 600;
     }
 
     .project-item {
       position: relative;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 24px 1fr auto;
       align-items: start;
       gap: 24px;
       padding: 24px 16px;
@@ -250,11 +347,14 @@
 
     .project-item:hover::before { transform: scaleY(1); }
 
+    .project-item > .face { margin-top: 4px; }
+    .project-item:hover > .face { transform: rotate(90deg); }
+
     .project-item h3 {
-      font-size: 18px;
-      line-height: 28px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
       margin-bottom: 8px;
       transition: color 300ms var(--ease);
     }
@@ -292,11 +392,13 @@
       content: '';
       position: absolute;
       left: 0;
-      top: 8px;
+      top: 7px;
       width: 6px;
       height: 6px;
+      border-radius: 1px;
       background: var(--accent);
     }
+
 
     .project-status {
       font-size: 12px;
@@ -313,8 +415,8 @@
     }
 
     .project-link {
-      font-size: 14px;
-      line-height: 20px;
+      font-size: 16px;
+      line-height: 24px;
       font-weight: 600;
       background-color: var(--accent);
       color: var(--bg);
@@ -359,6 +461,8 @@
       color: var(--muted);
     }
 
+    footer .rendered { font-variant-numeric: tabular-nums; }
+
     footer a {
       color: var(--muted);
       text-decoration: none;
@@ -377,6 +481,10 @@
     .fade-up:nth-child(2) { animation-delay: 100ms; }
     .fade-up:nth-child(3) { animation-delay: 200ms; }
     .fade-up:nth-child(4) { animation-delay: 300ms; }
+    .hero-text .fade-up { animation-delay: 700ms; }
+    .hero-text .fade-up:nth-child(4) { animation-delay: 800ms; }
+    .hero-text .fade-up:nth-child(5) { animation-delay: 900ms; }
+    .hero-text .fade-up:nth-child(6) { animation-delay: 1000ms; }
 
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); filter: blur(0); }
@@ -403,18 +511,22 @@
                   filter 900ms var(--ease);
     }
 
-    .scroll-progress {
+    .progress-cube {
       position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      width: 100%;
-      background: var(--accent);
+      top: 16px;
+      right: 16px;
       z-index: var(--z-overlay);
-      box-shadow: 0 0 12px rgba(47, 191, 133, 0.6);
-      transform: scaleX(0);
-      transform-origin: left;
+      padding: 8px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 300ms var(--ease), transform 700ms var(--ease);
     }
+
+    .progress-cube:hover { border-color: var(--accent); transform: rotate(90deg); }
+    .progress-cube:active { transform: rotate(90deg) scale(0.96); }
+    .progress-cube .face { width: 32px; height: 32px; }
 
     @media (max-width: 640px) {
       .hero-inner { flex-direction: column-reverse; align-items: flex-start; gap: 32px; }
@@ -423,7 +535,10 @@
 
     @media (max-width: 560px) {
       main { padding: 0 16px; }
-      .project-item { grid-template-columns: 1fr; }
+      .project-item { grid-template-columns: 24px 1fr; gap: 16px; }
+      .project-actions { grid-column: 2; }
+      .progress-cube { top: 12px; right: 12px; padding: 6px; }
+      .progress-cube .face { width: 24px; height: 24px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -434,26 +549,36 @@
         transition: none;
       }
       .fade-up { animation: none; opacity: 1; transform: none; filter: none; }
+      .cursor { animation: none; }
+      .project-item:hover > .face,
+      .progress-cube:hover,
+      .progress-cube:active { transform: none; }
       .project-item:hover,
       .project-link:hover,
       .project-link:active,
       .links a:hover,
       .links a:active,
-      .hero-photo img:hover { transform: none; }
-      .scroll-progress { display: none; }
+      .hero-photo:hover { transform: none; }
     }
   </style>
 </head>
 <body>
 <a class="skip-link" href="#experience">Skip to content</a>
-<div class="scroll-progress" aria-hidden="true"></div>
+<button class="progress-cube" type="button" aria-label="Back to top">
+  <span class="face" data-face="ggggggggg"></span>
+</button>
 <main>
 
   <header class="hero">
    <div class="hero-inner">
     <div class="hero-text">
+    <div class="statusline" aria-hidden="true">
+      <span class="live">chong@stanford:~</span>
+      <span id="clock"></span>
+    </div>
+    <p class="prompt"><b>$</b> <span class="type" data-speed="90">whoami</span></p>
+    <h1 class="fade-up">Chong<br><span class="last">Min</span><span class="cursor" aria-hidden="true"></span></h1>
     <p class="hero-label fade-up">Stanford University · <span>Class of 2029</span></p>
-    <h1 class="fade-up">Chong<br><span class="last">Min</span></h1>
     <p class="hero-bio fade-up">
       Hi, I'm Chong. I study <strong>Computer Science</strong> at Stanford, with interests in
       physical AI, data, and sustainability. Outside of class, I build fun side projects, do
@@ -481,9 +606,11 @@
   </header>
 
   <section id="experience">
-    <p class="section-label reveal">// Experience</p>
+    <p class="section-label reveal"><b>&gt;</b> <span class="type">ls experience/</span></p>
+    <h2 class="reveal">Experience</h2>
 
     <article class="project-item reveal">
+      <span class="face" data-face="ggggggggg" title="Solved: finished"></span>
       <div>
         <h3>
           Data/BI Engineering Intern
@@ -516,6 +643,7 @@
     </article>
 
     <article class="project-item reveal">
+      <span class="face" data-face="ggggggggg" title="Solved: finished"></span>
       <div>
         <h3>
           SWE/PM Intern
@@ -542,30 +670,13 @@
       </div>
     </article>
 
-    <article class="project-item reveal">
-      <div>
-        <h3>
-          Hydrologic Modeling Research Intern
-          <span class="project-status">Research</span>
-        </h3>
-
-        <div class="project-meta">
-          Environmental Modeling Lab, Seoul National University of Science and Technology
-        </div>
-
-        <p>
-          Modeled a 489 km² watershed using GIS workflows and public environmental data.
-          Processed 29 years of hydrologic data with SWAT simulations to analyze system level
-          behavior and evaluate water management strategies.
-        </p>
-      </div>
-    </article>
-
   </section>
 
   <section id="projects">
-    <p class="section-label reveal">// Projects</p>
+    <p class="section-label reveal"><b>&gt;</b> <span class="type">ls projects/</span></p>
+    <h2 class="reveal">Projects</h2>
     <article class="project-item reveal">
+      <span class="face" data-face="gggwgdggg" title="Scrambled: in progress"></span>
       <div>
         <h3>
           Local Groundwater Context Engine
@@ -587,6 +698,7 @@
     </article>
 
     <article class="project-item reveal">
+      <span class="face" data-face="gdwgggwgd" title="Scrambled: in progress"></span>
       <div>
         <h3>
           Omnibowl
@@ -609,30 +721,47 @@
     </article>
 
     <article class="project-item reveal">
+      <span class="face" data-face="dwgmdgwmd" title="Scrambled: in progress"></span>
       <div>
         <h3>
-          Thumbs Up Coffee
+          Cube Recon
           <span class="project-status">In progress</span>
         </h3>
 
         <p>
-          A product family for independent Korean specialty cafes: a free web tool that scores a
-          cafe's online discoverability against real neighborhood data and returns concrete
-          actions, an embeddable map with one pin per Instagram review, and an iOS app (Expo) for
-          comparative cafe ratings based on check ins. Deterministic scoring on real public
-          datasets, with no fabricated benchmarks.
+          Recovering a speedcube's starting scramble from video of the solve, using as little
+          footage as possible. The plan: computer vision to track the cube and read its
+          stickers, a sequence model trained with CTC loss to transcribe the moves, and Bayesian
+          state tracking plus constraint solving (Z3) to carry every observation back to the
+          first frame. Where a clip can't pin down every piece, it reports a distribution over
+          legal states instead of one guess. Ground truth comes from smart cube move logs synced
+          to the video.
         </p>
       </div>
+    </article>
 
-      <div class="project-actions">
-        <a href="https://thumbsupcoffee.vercel.app" target="_blank" rel="noopener" class="project-link">Diagnostic</a>
-        <a href="https://chongmindev.github.io/thumbsup-coffee-map/" target="_blank" rel="noopener" class="project-link secondary">Map</a>
+    <article class="project-item reveal">
+      <span class="face" data-face="wgddgwggd" title="Scrambled: in progress"></span>
+      <div>
+        <h3>
+          Thumbs Up Coffee Explore
+          <span class="project-status">In progress</span>
+        </h3>
+
+        <p>
+          An iOS app (Expo) for rating independent specialty cafes in Seoul's Apgujeong and
+          Sinsa. You check in, give a cafe one to three thumbs, then place it head to head
+          against cafes you've already ranked, building a personal ranked list instead of star
+          averages. Seeded with 270 audited independent coffee shops from the Kakao Local API,
+          with franchises filtered out.
+        </p>
       </div>
     </article>
   </section>
 
   <footer class="reveal">
     <span>Chong Min · Stanford '29</span>
+    <span class="rendered" id="rendered"></span>
     <a href="mailto:cmin29@stanford.edu">cmin29@stanford.edu</a>
   </footer>
 
@@ -641,6 +770,39 @@
   (function () {
     var reduce = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Type a line out character by character, with a cursor while it runs.
+    function type(el, speed, delay) {
+      var text = el.textContent;
+      if (reduce || !text) return;
+      el.textContent = '';
+      var cur = document.createElement('span');
+      cur.className = 'cursor small';
+      el.after(cur);
+      var i = 0;
+      setTimeout(function step() {
+        el.textContent = text.slice(0, ++i);
+        if (i < text.length) setTimeout(step, speed);
+        else setTimeout(function () { cur.remove(); }, 500);
+      }, delay || 0);
+    }
+
+    // Stream a project title in, leaving its status label untouched.
+    function stream(h3, delay) {
+      var node = h3.firstChild;
+      while (node && (node.nodeType !== 3 || !node.textContent.trim())) node = node.nextSibling;
+      if (reduce || !node) return;
+      var text = node.textContent.trim();
+      node.textContent = '';
+      var i = 0;
+      setTimeout(function step() {
+        node.textContent = text.slice(0, ++i) + ' ';
+        if (i < text.length) setTimeout(step, 18);
+      }, delay);
+    }
+
+    var heroType = document.querySelector('.prompt .type');
+    if (heroType) type(heroType, +heroType.dataset.speed, 250);
 
     var els = [].slice.call(document.querySelectorAll('.reveal'));
 
@@ -661,6 +823,11 @@
           if (entry.isIntersecting) {
             var el = entry.target;
             el.classList.add('is-visible');
+            var delay = parseInt(el.style.transitionDelay, 10) || 0;
+            var t = el.querySelector('.type');
+            if (t) type(t, 45, delay);
+            var h3 = el.querySelector('h3');
+            if (h3) stream(h3, delay + 150);
             observer.unobserve(el);
             // Drop the stagger delay after the reveal so hover responds immediately.
             setTimeout(function () { el.style.transitionDelay = ''; }, 1200);
@@ -670,21 +837,159 @@
       els.forEach(function (el) { observer.observe(el); });
     }
 
-    // Scroll-progress bar, driven by transform rather than width.
-    var bar = document.querySelector('.scroll-progress');
-    if (bar && !reduce) {
+    // Live Pacific clock in the status line.
+    var clock = document.getElementById('clock');
+    if (clock && window.Intl) {
+      var fmt = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles', hour12: false,
+        hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short'
+      });
+      var tick = function () {
+        var parts = fmt.formatToParts(new Date());
+        var get = function (t) { return (parts.find(function (p) { return p.type === t; }) || {}).value; };
+        clock.textContent = get('timeZoneName') + ' ' + get('hour') + ':' + get('minute') + ':' + get('second');
+      };
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    // How long the page took to render.
+    var rendered = document.getElementById('rendered');
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+        var ms = nav ? nav.domContentLoadedEventEnd : performance.now();
+        if (rendered && ms) rendered.textContent = 'rendered in ' + Math.round(ms) + 'ms';
+      }, 0);
+    });
+
+    // Build cube faces from their sticker pattern (g teal, w white, d dark).
+    [].forEach.call(document.querySelectorAll('.face'), function (face) {
+      face.setAttribute('aria-hidden', 'true');
+      face.dataset.face.split('').forEach(function (c) {
+        var i = document.createElement('i');
+        if (c !== 'g') i.className = c;
+        face.appendChild(i);
+      });
+    });
+
+    // Corner cube: the front face of a scrambled cube. Scrolling down plays the
+    // inverse of the scramble one turn at a time, so it is solved at the bottom.
+    // Faces: 0 front, 1 right, 2 back, 3 left, 4 up, 5 down. Only the front shows.
+    var pc = document.querySelector('.progress-cube');
+    if (pc) {
+      var faceEl = pc.querySelector('.face');
+      var cells = faceEl.querySelectorAll('i');
+      var COLORS = ['g', 'w', 'd', 'm', 'w', 'm'];
+      var cube = [];
+      for (var f = 0; f < 6; f++) for (var k = 0; k < 9; k++) cube.push(COLORS[f]);
+
+      var at = function (face, r, c) { return face * 9 + r * 3 + c; };
+      // A row turn slides a row around front, right, back, left; a column turn
+      // slides a column around front, down, back, up. dir +1 pulls the next face in.
+      var RING = { row: [0, 1, 2, 3], col: [0, 5, 2, 4] };
+      var turn = function (state, mv) {
+        var ring = RING[mv.type];
+        if (mv.dir < 0) ring = [ring[0], ring[3], ring[2], ring[1]];
+        var next = state.slice();
+        for (var n = 0; n < 4; n++) {
+          for (var j = 0; j < 3; j++) {
+            var r = mv.type === 'row' ? mv.i : j, c = mv.type === 'row' ? j : mv.i;
+            next[at(ring[n], r, c)] = state[at(ring[(n + 1) % 4], r, c)];
+          }
+        }
+        return next;
+      };
+      var inverse = function (mv) { return { type: mv.type, i: mv.i, dir: -mv.dir }; };
+
+      var scramble = [];
+      do {
+        scramble = [];
+        cube = cube.map(function (_, idx) { return COLORS[Math.floor(idx / 9)]; });
+        for (var m = 0; m < 7; m++) {
+          var mv = { type: m % 2 ? 'col' : 'row', i: Math.floor(Math.random() * 3), dir: Math.random() < 0.5 ? 1 : -1 };
+          scramble.push(mv);
+          cube = turn(cube, mv);
+        }
+      } while (cube.slice(0, 9).filter(function (c) { return c === 'g'; }).length > 5);
+
+      var paint = function () {
+        for (var q = 0; q < 9; q++) {
+          cells[q].className = cube[q] === 'g' ? '' : cube[q];
+          cells[q].style.visibility = '';
+        }
+      };
+      paint();
+
+      // Animate one turn: a strip of the front line plus the incoming line slides one face over.
+      var animate = function (mv, done) {
+        if (reduce) { cube = turn(cube, mv); paint(); done(); return; }
+        var size = faceEl.clientWidth, step = (size + 2) / 3;
+        var ring = RING[mv.type], from = mv.dir > 0 ? ring[1] : ring[3];
+        var front = [], incoming = [];
+        for (var j = 0; j < 3; j++) {
+          var r = mv.type === 'row' ? mv.i : j, c = mv.type === 'row' ? j : mv.i;
+          front.push(cube[at(0, r, c)]);
+          incoming.push(cube[at(from, r, c)]);
+          cells[r * 3 + c].style.visibility = 'hidden';
+        }
+        var seq = mv.dir > 0 ? front.concat(incoming) : incoming.concat(front);
+        var strip = document.createElement('div');
+        strip.className = 'strip';
+        var cell = (size - 4) / 3;
+        if (mv.type === 'row') {
+          strip.style.cssText = 'top:' + (mv.i * step) + 'px;left:0;grid-template-columns:repeat(6,' + cell + 'px);grid-template-rows:' + cell + 'px';
+        } else {
+          strip.style.cssText = 'left:' + (mv.i * step) + 'px;top:0;grid-template-rows:repeat(6,' + cell + 'px);grid-template-columns:' + cell + 'px';
+        }
+        seq.forEach(function (col) {
+          var s = document.createElement('i');
+          if (col !== 'g') s.className = col;
+          strip.appendChild(s);
+        });
+        var axis = mv.type === 'row' ? 'translateX' : 'translateY';
+        var shift = 3 * step;
+        strip.style.transform = axis + '(' + (mv.dir > 0 ? 0 : -shift) + 'px)';
+        faceEl.appendChild(strip);
+        strip.getBoundingClientRect();
+        strip.style.transform = axis + '(' + (mv.dir > 0 ? -shift : 0) + 'px)';
+        setTimeout(function () {
+          cube = turn(cube, mv);
+          paint();
+          strip.remove();
+          done();
+        }, 340);
+      };
+
+      // undone = how many scramble turns have been reversed so far.
+      var undone = 0, target = 0, running = false;
+      var run = function () {
+        if (undone === target) { running = false; return; }
+        running = true;
+        if (undone < target) {
+          var mv = inverse(scramble[scramble.length - 1 - undone]);
+          animate(mv, function () { undone++; run(); });
+        } else {
+          var mv2 = scramble[scramble.length - undone];
+          animate(mv2, function () { undone--; run(); });
+        }
+      };
+
       var ticking = false;
       var update = function () {
         var h = document.documentElement;
         var max = h.scrollHeight - h.clientHeight;
-        var pct = max > 0 ? h.scrollTop / max : 0;
-        bar.style.transform = 'scaleX(' + pct + ')';
+        target = max > 0 ? Math.round((h.scrollTop / max) * scramble.length) : scramble.length;
+        if (!running) run();
         ticking = false;
       };
       window.addEventListener('scroll', function () {
         if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
       }, { passive: true });
       update();
+      pc.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
     }
   })();
 </script>
