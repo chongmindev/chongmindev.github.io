@@ -6,6 +6,7 @@ A single static page (`index.html`, inline CSS and JS, Google Fonts) served by G
 from `main`. No build step: edit `index.html`, push, and Pages redeploys.
 
 - `index.html`: bio, experience, and projects
-- `images/`: portrait
+- `404.html`: not found page served by GitHub Pages
+- `images/`: portrait and favicon
 
 Preview locally with `python3 -m http.server` and open <http://localhost:8000>.
